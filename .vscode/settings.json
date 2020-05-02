@@ -1,0 +1,8 @@
+{
+    "python.pythonPath": "C:\\Python\\Miniconda3\\envs\\tf1x\\python.exe",
+    "python.formatting.provider": "yapf",
+    "python.formatting.yapfArgs": [
+        "--style",
+        "{column_limit: 110}"
+    ]
+}
