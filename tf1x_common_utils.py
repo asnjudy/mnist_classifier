@@ -1,5 +1,11 @@
-from enum import Enum, unique
 import tensorflow as tf
+
+
+def mnist_load_data():
+    from tensorflow.examples.tutorials.mnist import input_data
+
+    mnist = input_data.read_data_sets('./data', one_hot=True)
+    return mnist
 
 
 def create_weight_variable(shape, name=None):
@@ -25,7 +31,7 @@ def conv_op(x, filters_shape, variable_scope_name):
     filters_num = filters_shape[-1]
     with tf.variable_scope(variable_scope_name) as conv:
         conv_filters = create_weight_variable(shape=filters_shape, name="filters")
-        conv_biases = create_bias_variable(shape=(filters_num, ), name='bias')
+        conv_biases = create_bias_variable(shape=(filters_num,), name='bias')
         conv_out = conv2d__max_pool_3x3__norm(x, W=conv_filters, bias=conv_biases, name='conv')
         return conv_out
 
@@ -40,14 +46,7 @@ def fc_op(x, input_unit_num, unit_num, variable_scope_name):
     """
     with tf.variable_scope(variable_scope_name) as fc:
         W = create_weight_variable(shape=(input_unit_num, unit_num), name='weights')
-        b = create_bias_variable(shape=(unit_num, ), name='bias')
+        b = create_bias_variable(shape=(unit_num,), name='bias')
 
         fc_out = tf.nn.bias_add(tf.matmul(x, W), b)  # 全连接
         return fc_out
-
-
-@unique
-class ModelMode(Enum):
-    TRIAN = 'train'
-    EVAL = 'eval'
-    PREDICT = 'predict'
