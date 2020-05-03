@@ -37,12 +37,18 @@ def tf1x_impl2_1():
 
 
 def tf1x_impl3_1():
+    """ 实现方案3-1
+        用 keras 搭建模型，使用 tf.estimator.Estimator 训练
+    """
     from tf1x_impl3.alexnet_tf_Estimator import tf_keras_model_fn, alexnet_train
 
     alexnet_train(tf_keras_model_fn)
 
 
 def tf1x_impl3_2():
+    """ 实现方案3-2
+        用 tf.nn 搭建模型，使用 tf.estimator.Estimator 训练
+    """
     from tf1x_impl3.alexnet_tf_Estimator import tf_nn_model_fn, alexnet_train
 
     alexnet_train(tf_nn_model_fn)
